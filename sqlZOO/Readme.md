@@ -1,4 +1,4 @@
-[SELECT WITHIN SELECT](https://sqlzoo.net/wiki/SELECT_within_SELECT_Tutorial)
+[EXERCISE: SELECT WITHIN SELECT](https://sqlzoo.net/wiki/SELECT_within_SELECT_Tutorial)
 
 1. <b>Percentages of Germany</b></br>
    select name, </br>
@@ -18,3 +18,13 @@
    select continent, name, area</br>
    from largest_cte</br>
    where rank=1
+4. <b>Three time bigger</b></br>
+   SELECT x.name, x.continent</br>
+   FROM world x</br>
+   WHERE x.population > ALL(SELECT population*3</br>
+                            FROM world y </br>
+                            WHERE y.continent = x.continent</br>
+                            AND x.name<>y.name)
+                            
+                            
+[EXERCISE: SUM AND COUNT](https://sqlzoo.net/wiki/SUM_and_COUNT)
