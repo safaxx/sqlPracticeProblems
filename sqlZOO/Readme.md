@@ -47,6 +47,7 @@
    ```
  
  2. <b>Show teamname and the total number of goals scored.</b></br>
+ 
  ```sql
     SELECT teamname, COUNT(gtime)
     FROM eteam JOIN goal ON id=teamid
@@ -54,6 +55,7 @@
     ```
     
 3. <b>For every match involving 'POL', show the matchid, date and the number of goals scored.</b></br>
+
 ```sql
    SELECT matchid,mdate, count(*)
    FROM game JOIN goal ON matchid = id
