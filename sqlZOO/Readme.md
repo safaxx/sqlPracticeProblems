@@ -12,7 +12,7 @@
    ```sql
    select name </br>
    from world </br>
-   where gdp > ALL(select gdp from world where continent='Europe' and gdp>0) ```
+   where gdp > ALL(select gdp from world where continent='Europe' and gdp>0)  ```
    
  3. <b>Largest in each continent</b></br>
  ```sql
@@ -21,43 +21,49 @@
    from world )</br>
    select continent, name, area</br>
    from largest_cte</br>
-   where rank=1 ```
+   where rank=1  ```
    
 4. <b>Three time bigger</b></br>
+```sql
    SELECT x.name, x.continent</br>
    FROM world x</br>
    WHERE x.population > ALL(SELECT population*3</br>
                             FROM world y </br>
                             WHERE y.continent = x.continent</br>
-                            AND x.name<>y.name)
+                            AND x.name<>y.name) ```
                             
                             
 [EXERCISE: JOIN](https://sqlzoo.net/wiki/The_JOIN_operation)</br>
 
- 1.<b>show the name of all players who scored a goal against Germany.</b></br>
+ 1.<b>Show the name of all players who scored a goal against Germany.</b></br>
+ ```sql
    SELECT DISTINCT(player)</br>
    FROM game JOIN goal ON matchid = id </br>
    WHERE (team1='GER' OR team2='GER')</br>
-   and teamid != 'GER'
+   and teamid != 'GER' ```
  
  2. <b>Show teamname and the total number of goals scored.</b></br>
+ ```sql
     SELECT teamname, COUNT(gtime)</br>
     FROM eteam JOIN goal ON id=teamid</br>
-    GROUP BY teamname
+    GROUP BY teamname ```
     
 3. <b>For every match involving 'POL', show the matchid, date and the number of goals scored.</b></br>
+```sql
    SELECT matchid,mdate, count(*)</br>
    FROM game JOIN goal ON matchid = id </br>
    WHERE (team1 = 'POL' OR team2 = 'POL')</br>
-   GROUP BY matchid, mdate
+   GROUP BY matchid, mdate ```
    
 4. <b>For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'</b></br>
+```sql
    SELECT matchid, mdate, count(gtime)</br>
    from game join goal on id=teamid</br>
    where teamid='GER'</br>
-   GROUP BY matchid, mdate, gtime
+   GROUP BY matchid, mdate, gtime ```
 
 5. <b>List every match with the goals scored by each team as shown. This will use "CASE WHEN" which has not been explained in any previous exercises.</b></br>
+```sql
    SELECT mdate,</br>
        team1,</br>
        SUM(CASE WHEN teamid = team1 THEN 1 ELSE 0 END) AS score1,</br>
@@ -65,6 +71,6 @@
        SUM(CASE WHEN teamid = team2 THEN 1 ELSE 0 END) AS score2 FROM</br>
     game LEFT JOIN goal ON (id = matchid)</br>
     GROUP BY mdate,team1,team2</br>
-    ORDER BY mdate, team1, team2
+    ORDER BY mdate, team1, team2 ```
 
 
