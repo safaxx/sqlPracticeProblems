@@ -1,10 +1,11 @@
 [EXERCISE: SELECT WITHIN SELECT](https://sqlzoo.net/wiki/SELECT_within_SELECT_Tutorial)
-
+'''sql
 1. <b>Percentages of Germany</b></br>
    select name, </br>
    concat(cast(round(population*100/(select population from world where name='Germany'),0) as int),'%') as percentage</br>
    from world </br>
    where continent='Europe'
+   '''
    
 2. <b>Bigger than every country in Europe</b></br>
    select name </br>
