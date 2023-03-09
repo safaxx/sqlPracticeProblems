@@ -29,7 +29,7 @@
                             
 [EXERCISE: JOIN](https://sqlzoo.net/wiki/The_JOIN_operation)</br>
 
-1.<b>show the name of all players who scored a goal against Germany.</b></br>
+ 1.<b>show the name of all players who scored a goal against Germany.</b></br>
    SELECT DISTINCT(player)</br>
    FROM game JOIN goal ON matchid = id </br>
    WHERE (team1='GER' OR team2='GER')</br>
