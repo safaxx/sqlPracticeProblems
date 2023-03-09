@@ -9,21 +9,21 @@
    ```
    
 2. <b>Bigger than every country in Europe</b></br>
-   ```sql
+```sql
    select name 
    from world 
-   where gdp > ALL(select gdp from world where continent='Europe' and gdp>0) 
+where gdp > ALL(select gdp from world where continent='Europe' and gdp>0) 
    ```
    
  3. <b>Largest in each continent</b></br>
  ```sql
-    with largest_cte as 
+   with largest_cte as 
    (select *, rank() over(partition by continent order by area desc) rank
    from world )
    select continent, name, area
    from largest_cte
    where rank=1  
-   ```
+```
    
 4. <b>Three time bigger</b></br>
 ```sql
@@ -44,7 +44,7 @@
    FROM game JOIN goal ON matchid = id 
    WHERE (team1='GER' OR team2='GER')
    and teamid != 'GER' 
-   ```
+```
  
  2. <b>Show teamname and the total number of goals scored.</b></br>
  
@@ -52,7 +52,7 @@
     SELECT teamname, COUNT(gtime)
     FROM eteam JOIN goal ON id=teamid
     GROUP BY teamname
-    ```
+ ```
     
 3. <b>For every match involving 'POL', show the matchid, date and the number of goals scored.</b></br>
 
@@ -61,7 +61,7 @@
    FROM game JOIN goal ON matchid = id
    WHERE (team1 = 'POL' OR team2 = 'POL')
    GROUP BY matchid, mdate 
-   ```
+```
    
 4. <b>For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'</b></br>
 ```sql
@@ -69,7 +69,7 @@
    from game join goal on id=teamid
    where teamid='GER'
    GROUP BY matchid, mdate, gtime
-   ```
+```
 
 5. <b>List every match with the goals scored by each team as shown. This will use "CASE WHEN" which has not been explained in any previous exercises.</b></br>
 ```sql
@@ -81,6 +81,6 @@
     game LEFT JOIN goal ON (id = matchid)
     GROUP BY mdate,team1,team2
     ORDER BY mdate, team1, team2 
-    ```
+ ```
 
 
