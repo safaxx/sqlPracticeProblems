@@ -27,4 +27,38 @@
                             AND x.name<>y.name)
                             
                             
-[EXERCISE: SUM AND COUNT](https://sqlzoo.net/wiki/SUM_and_COUNT)
+[EXERCISE: JOIN](https://sqlzoo.net/wiki/The_JOIN_operation)
+1.<b>show the name of all players who scored a goal against Germany.</b>
+   SELECT DISTINCT(player)
+   FROM game JOIN goal ON matchid = id 
+   WHERE (team1='GER' OR team2='GER')
+   and teamid != 'GER'
+ 
+ 2. <b>Show teamname and the total number of goals scored.</b>
+    SELECT teamname, COUNT(gtime)
+    FROM eteam JOIN goal ON id=teamid
+    GROUP BY teamname
+    
+3. <b>For every match involving 'POL', show the matchid, date and the number of goals scored.</b>
+   SELECT matchid,mdate, count(*)
+   FROM game JOIN goal ON matchid = id 
+   WHERE (team1 = 'POL' OR team2 = 'POL')
+   GROUP BY matchid, mdate
+   
+4. <b>For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'</b>
+   SELECT matchid, mdate, count(gtime)
+   from game join goal on id=teamid
+   where teamid='GER'
+   GROUP BY matchid, mdate, gtime
+
+5. <b>List every match with the goals scored by each team as shown. This will use "CASE WHEN" which has not been explained in any previous exercises.</b>
+   SELECT mdate,
+       team1,
+       SUM(CASE WHEN teamid = team1 THEN 1 ELSE 0 END) AS score1,
+       team2,
+       SUM(CASE WHEN teamid = team2 THEN 1 ELSE 0 END) AS score2 FROM
+    game LEFT JOIN goal ON (id = matchid)
+    GROUP BY mdate,team1,team2
+    ORDER BY mdate, team1, team2
+
+
