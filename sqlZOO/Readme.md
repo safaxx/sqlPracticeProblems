@@ -10,9 +10,9 @@
    
 2. <b>Bigger than every country in Europe</b></br>
 ```sql
-   select name 
-   from world 
-where gdp > ALL(select gdp from world where continent='Europe' and gdp>0) 
+  select name 
+  from world 
+  where gdp > ALL(select gdp from world where continent='Europe' and gdp>0) 
    ```
    
  3. <b>Largest in each continent</b></br>
