@@ -83,4 +83,49 @@
     ORDER BY mdate, team1, team2 
  ```
 
+[EXERICSE: MORE ON JOINS](https://sqlzoo.net/wiki/More_JOIN_operation)
+
+1. <b>Busy years for Rock Hudson</b>
+```sql
+SELECT yr,COUNT(title) FROM
+  movie JOIN casting ON movie.id=movieid
+        JOIN actor   ON actorid=actor.id
+WHERE name='Rock Hudson'
+GROUP BY yr
+HAVING COUNT(title) > 2
+```
+2. <b>Lead actor in Julie Andrews movies</b>
+```sql
+SELECT title, name
+FROM actor a join casting c on a.id=c.actorid
+join movie m on m.id=c.movieid
+WHERE movieid IN 
+(select movieid from casting where actorid =
+  (SELECT id FROM actor
+  WHERE name='Julie Andrews'))
+and ord=1
+
+```
+3. <b>Actors with 15 leading roles</b>
+```sql
+with movies_cte as (
+select actorid, ord, row_number() over (partition by actorid order by ord) no_movies
+from casting
+where ord=1)
+select distinct(name )
+from actor join movies_cte on id=actorid 
+where no_movies >= 15
+```
+4. <b>released in the year 1978</b>
+```sql
+SELECT name
+FROM actor JOIN casting ON actorid = id
+WHERE movieid IN(SELECT movieid FROM casting 
+                  WHERE actorid = (SELECT id FROM actor 
+                                   WHERE name = 'Art Garfunkel'))
+AND name <> 'Art Garfunkel';
+```
+
+
+
 
