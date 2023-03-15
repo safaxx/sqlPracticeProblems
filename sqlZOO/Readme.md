@@ -118,6 +118,16 @@ where no_movies >= 15
 ```
 4. <b>released in the year 1978</b>
 ```sql
+select title, count(actorid)
+FROM casting c
+join movie m on m.id=c.movieid 
+where yr=1978
+group by title
+order by count(actorid) desc, title 
+
+```
+5. <b>with 'Art Garfunkel'</b>
+```sql
 SELECT name
 FROM actor JOIN casting ON actorid = id
 WHERE movieid IN(SELECT movieid FROM casting 
