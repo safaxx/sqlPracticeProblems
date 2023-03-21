@@ -136,6 +136,32 @@ WHERE movieid IN(SELECT movieid FROM casting
 AND name <> 'Art Garfunkel';
 ```
 
+[EXERCISE: USING NULL, COALESCE, CASE](https://sqlzoo.net/wiki/Using_N)
+
+1. <b>Print the mobile number. Use the number '07986 444 2266' if there is no number given.</b>
+```sql
+select name, coalesce(mobile, '07986 444 2266') as mobile
+from teacher 
+```
+
+2. <b>show each department and the number of staff.</b>
+```sql
+SELECT dept.name, COUNT(teacher.name) 
+FROM teacher RIGHT JOIN dept ON dept.id = teacher.dept 
+GROUP BY dept.name;
+
+```
+
+3. <b>show the name of each teacher followed by 'Sci' if the teacher is in dept 1 or 2 and show 'Art' if the teacher's dept is 3 and 'None' otherwise.</b>
+```sql
+select name, case 
+       when dept=1  or dept=2 then 'Sci'
+       when dept=3 then 'Art'
+       else 'None'
+       end 
+from teacher
+
+```
 
 
 
