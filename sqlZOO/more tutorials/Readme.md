@@ -48,3 +48,4 @@ WHERE question='Q01'
 AND (institution LIKE '%Manchester%') 
 group by institution</b>
 ```
+[Link to explaination of this question on stack overflow](https://stackoverflow.com/questions/64921991/looking-for-an-explantion-for-the-official-answer-to-sqlzoo-nss-tutorial-8)
